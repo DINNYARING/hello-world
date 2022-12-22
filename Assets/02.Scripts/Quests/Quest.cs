@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Scriptable/QuestData", fileName ="Quest Data")]
 [System.Serializable]
-public class Quest
+public class Quest : ScriptableObject
 {
     public enum QuestProgress { NOT_AVAILABLE, AVAILABLE, ACCEPTED, COMPLETE, DONE }
 

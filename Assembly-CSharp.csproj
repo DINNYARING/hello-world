@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\02.Scripts\Quests\Quest.cs" />
+    <Compile Include="Assets\02.Scripts\Quests\QuestManager.cs" />
+    <Compile Include="Assets\02.Scripts\Quests\QuestObject.cs" />
+    <Compile Include="Assets\02.Scripts\Quests\PlayerQuest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
