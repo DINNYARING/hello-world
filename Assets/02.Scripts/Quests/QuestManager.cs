@@ -24,23 +24,25 @@ public class QuestManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // INTERACTION WITH NPC
+    // WHEN TALK TO NPC, CHECK ANY QUEST EXIST
     public void QuestRequest(QuestObject NPCQuestObject)
     {
         // AVAILABLE QUEST
         if (NPCQuestObject.availableQuestIDs.Count > 0)
         {
-            for (int i = 0; i > questList.Count; i++)
+            for (int i = 0; i < questList.Count; i++)
             {
-                for (int j = 0; j > NPCQuestObject.availableQuestIDs.Count; j++)
+                for (int j = 0; j < NPCQuestObject.availableQuestIDs.Count; j++)
                 {
                     if (questList[i].id == NPCQuestObject.availableQuestIDs[j] 
                         && questList[i].progress == Quest.QuestProgress.AVAILABLE)
                     {
-                        AcceptQuest(NPCQuestObject.availableQuestIDs[j]);
                         Debug.Log("Quest ID : " + NPCQuestObject.availableQuestIDs[j] + " " + questList[i].progress);
+                        //AcceptQuest(NPCQuestObject.availableQuestIDs[j]);
 
-                        // quest ui manager
+                        // Quest UI Manager
+                        QuestUIManager.uiManager.questAvailable = true;
+                        QuestUIManager.uiManager.availableQuests.Add(questList[i]);
                     }
                 }
             }
@@ -49,15 +51,18 @@ public class QuestManager : MonoBehaviour
         // ACTIVE QUEST
         for (int i = 0; i < currentQuestList.Count; i++)
         {
-            for (int j = 0; j < NPCQuestObject.givenQuestIDs.Count; j++)
+            for (int j = 0; j < NPCQuestObject.receivableQuestIDs.Count; j++)
             {
-                if (currentQuestList[i].id == NPCQuestObject.givenQuestIDs[j]
+                if (currentQuestList[i].id == NPCQuestObject.receivableQuestIDs[j]
                     && currentQuestList[i].progress == Quest.QuestProgress.ACCEPTED
                     || currentQuestList[i].progress == Quest.QuestProgress.COMPLETE)
                 {
-                    CompleteQuest(NPCQuestObject.givenQuestIDs[j]); // it checks double, so don't worry
-                    Debug.Log("Quest ID : " + NPCQuestObject.givenQuestIDs[j] + " " + currentQuestList[i].progress);
-                    // quest ui manager
+                    Debug.Log("Quest ID : " + NPCQuestObject.receivableQuestIDs[j] + " " + currentQuestList[i].progress);
+                    //CompleteQuest(NPCQuestObject.receivableQuestIDs[j]); // Only the examination
+
+                    // Quest UI Manager
+                    QuestUIManager.uiManager.questAvailable = true;
+                    QuestUIManager.uiManager.activeQuests.Add(questList[i]);
 
                 }
             }
@@ -137,11 +142,13 @@ public class QuestManager : MonoBehaviour
     {
         for (int i = 0; i < currentQuestList.Count; i++)
         {
+            // 목표
             if (currentQuestList[i].questObjective == questObjective 
                 && currentQuestList[i].progress == Quest.QuestProgress.ACCEPTED)
             {
                 currentQuestList[i].questObjectiveCount += itemAmount;
             }
+            // 목표 수량
             if (currentQuestList[i].questObjectiveCount >= currentQuestList[i].questObjectiveRequirement 
                 && currentQuestList[i].progress == Quest.QuestProgress.ACCEPTED)
             {
@@ -223,9 +230,9 @@ public class QuestManager : MonoBehaviour
     {
         for (int i = 0; i < questList.Count; i++)
         {
-            for (int j = 0; j < NPCQuestObject.givenQuestIDs.Count; j++)
+            for (int j = 0; j < NPCQuestObject.receivableQuestIDs.Count; j++)
             {
-                if (questList[i].id == NPCQuestObject.givenQuestIDs[j]
+                if (questList[i].id == NPCQuestObject.receivableQuestIDs[j]
                    && questList[i].progress == Quest.QuestProgress.ACCEPTED)
                 {
                     return true;
@@ -238,9 +245,9 @@ public class QuestManager : MonoBehaviour
     {
         for (int i = 0; i < questList.Count; i++)
         {
-            for (int j = 0; j < NPCQuestObject.givenQuestIDs.Count; j++)
+            for (int j = 0; j < NPCQuestObject.receivableQuestIDs.Count; j++)
             {
-                if (questList[i].id == NPCQuestObject.givenQuestIDs[j]
+                if (questList[i].id == NPCQuestObject.receivableQuestIDs[j]
                    && questList[i].progress == Quest.QuestProgress.COMPLETE)
                 {
                     return true;
