@@ -28,7 +28,7 @@ public class QuestUIManager : MonoBehaviour
     public List<Quest> activeQuests = new List<Quest>();     // running quest
 
     // BUTTONS
-    public GameObject qButton;      // key for Log Panel Activation
+    public GameObject qButton;          // key for Log Panel Activation
     public GameObject qLogButton;
     private List<GameObject> qButtons = new List<GameObject>();
 
@@ -61,6 +61,11 @@ public class QuestUIManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        questPanel.SetActive(false);
     }
 
     void Update()
@@ -105,6 +110,27 @@ public class QuestUIManager : MonoBehaviour
         foreach (Quest availableQuest in availableQuests)
         {
             GameObject questButton = Instantiate(qButton);
+
+            // SCRIPT
+            QButtonScript qBScript = questButton.GetComponent<QButtonScript>();
+            qBScript.questID = availableQuest.id;
+            qBScript.questTitle.text = availableQuest.title;    // .text = string
+
+            questButton.transform.SetParent(qButtonSpacer1, false);
+            qButtons.Add(questButton);
+        }
+
+        foreach (Quest activeQuest in activeQuests)
+        {
+            GameObject questButton = Instantiate(qButton);
+
+            // SCRIPT
+            QButtonScript qBScript = questButton.GetComponent<QButtonScript>();
+            qBScript.questID = activeQuest.id;
+            qBScript.questTitle.text = activeQuest.title;    // .text = string
+
+            questButton.transform.SetParent(qButtonSpacer2, false);
+            qButtons.Add(questButton);
         }
     }
 }

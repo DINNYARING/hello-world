@@ -59,15 +59,15 @@
     <Compile Include="Assets\02.Scripts\Common\FollowCamera.cs" />
     <Compile Include="Assets\03.UISource\Sub Sources\Scripts\PanelControlSimpleCasual.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerCtrl.cs" />
+    <Compile Include="Assets\02.Scripts\Quests\CollisionHandler.cs" />
     <Compile Include="Assets\02.Scripts\Common\LookAtCamera.cs" />
     <Compile Include="Assets\03.UISource\Sub Sources\Scripts\PanelSimpleCasual.cs" />
     <Compile Include="Assets\02.Scripts\Quests\PlayerQuest.cs" />
+    <Compile Include="Assets\02.Scripts\QuestUI\QuestUIManager.cs" />
     <Compile Include="Assets\02.Scripts\Quests\Quest.cs" />
     <Compile Include="Assets\02.Scripts\Quests\QuestManager.cs" />
-    <Compile Include="Assets\02.Scripts\Quests\QuestObject.cs" />
-    <Compile Include="Assets\02.Scripts\Quests\CollisionHandler.cs" />
-    <Compile Include="Assets\02.Scripts\QuestUI\QuestUIManager.cs" />
     <Compile Include="Assets\02.Scripts\QuestUI\QButtonScript.cs" />
+    <Compile Include="Assets\02.Scripts\Quests\QuestObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
